@@ -1,0 +1,11 @@
+COMPLETED,PRIORITY,COMPLETION_DATE,CREATION_DATE,DESCRIPTION,PROJECT_TAG,CONTEXT_TAG
+false,,,,Buy groceries,,colruyt
+false,A,,,Complete Timesheet,,optis
+false,,,2020-06-30,Finish User Story mht-6,manhattan,
+false,,,,Talk to Keshia about demo feedback,manhattan,optis
+false,,,,Write blogpost about TDD,,
+false,,,,Walk the dog,,
+false,B,,,Prepare Java Bootcamp,bootcamp,optis
+false,,,,Call dentist,,phone
+true,,,,Read changelog new spring boot version,,optis
+false,,,,Install new laptop,,
