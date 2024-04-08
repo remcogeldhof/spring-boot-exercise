@@ -17,11 +17,16 @@ public class TodoService implements CommandLineRunner {
     @Autowired
     private TodoRepository todoRepository;
 
-    public List<TodoItem> getAllTodoItems(String context) {
+    public List<TodoItem> getAllTodoItems() {
+        return todoRepository.findAll();
+    }
+
+    public List<TodoItem> getAllTodoItemsByContext(String context) {
         return todoRepository.findByContextTag(context);
     }
 
-    private static List<TodoItem> extractTodoItems(String context) {
+
+    private static List<TodoItem> extractTodoItems() {
         List<TodoItem> todoItems = new ArrayList<>();
 
         try {
@@ -33,10 +38,7 @@ public class TodoService implements CommandLineRunner {
 
             while ((line = reader.readLine()) != null) {
                 // sort lines on priority, empty values
-                TodoItem todoItem = getTodoItem(line);
-                if (context == null || context.equals(todoItem.getContextTag())) {
-                    todoItems.add(todoItem);
-                }
+                todoItems.add(getTodoItem(line));
             }
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
@@ -66,8 +68,8 @@ public class TodoService implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        List<TodoItem> list = extractTodoItems(null);
+    public void run(String... args) {
+        List<TodoItem> list = extractTodoItems();
         todoRepository.saveAll(list);
     }
 }
