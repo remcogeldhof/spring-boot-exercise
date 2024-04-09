@@ -5,9 +5,7 @@ import be.optis.entity.TodoItem;
 import be.optis.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,4 +44,11 @@ public class ToDoController {
         TodoResponse todoResponse = new TodoResponse(todoItems.size(), todoItems);
         return new ResponseEntity<>(todoResponse, HttpStatus.OK);
     }
+
+    @PutMapping("/todos/{id}")
+    public ResponseEntity<?> updateTodoItem(@PathVariable("id") Long id, @RequestBody TodoItem todoItem) {
+        TodoItem updatedTodoItem = todoService.updateTodoItem(id, todoItem);
+        return new ResponseEntity<>(updatedTodoItem, HttpStatus.OK);
+    }
+
 }

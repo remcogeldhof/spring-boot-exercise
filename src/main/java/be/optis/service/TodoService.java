@@ -25,6 +25,20 @@ public class TodoService implements CommandLineRunner {
         return todoRepository.findByContextTag(context);
     }
 
+    public TodoItem updateTodoItem(Long todoId, TodoItem todoItem) {
+        return todoRepository.findById(todoId)
+            .map(todo -> {
+                todo.setCompleted(todoItem.isCompleted());
+                todo.setDescription(todoItem.getDescription());
+                todo.setPriority(todoItem.getPriority());
+                todo.setContextTag(todoItem.getContextTag());
+                todo.setCreationDate(todoItem.getCreationDate());
+                todo.setCompletionDate(todoItem.getCompletionDate());
+                todo.setProjectTag(todoItem.getProjectTag());
+                return todoRepository.save(todo);
+            })
+            .orElseThrow(() -> new RuntimeException("Todo not found with id " + todoId));
+    }
 
     private static List<TodoItem> extractTodoItems() {
         List<TodoItem> todoItems = new ArrayList<>();
